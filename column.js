@@ -1,8 +1,12 @@
-function Column(name) {
+var prefix = 'https://cors-anywhere.herokuapp.com/';
+var baseUrl = 'https://kodilla.com/pl/bootcamp-api';
+
+function Column(id, name) {
     var self = this;
 
-    this.id = randomString();
-    this.name = name;
+    this.id = id;
+    this.name = name || 'Temp';
+
     this.element = createColumn();
 
     function createColumn() {
@@ -19,8 +23,20 @@ function Column(name) {
         });
 
         columnAddCard.click(function(event) {
+            var cardName = prompt("Enter the name of the card");
             event.preventDefault();
-            self.createCard(new Card(prompt("Wpisz nazwę karty")));
+            $.ajax({
+                url: prefix + baseUrl + '/card',
+                method: 'POST',
+                data: {
+                    name: cardName,
+                    bootcamp_kanban_column_id: self.id
+                },
+                success: function(response) {
+                    var card = new Card(response.id, cardName);
+                    self.createCard(card);
+                }
+            });
         });
 
         // KONSTRUOWANIE ELEMENTU KOLUMNY
@@ -36,6 +52,13 @@ Column.prototype = {
         this.element.children('ul').append(card.element);
     },
     deleteColumn: function() {
-        this.element.remove();
+        var self = this;
+        $.ajax({
+            url: prefix + baseUrl + '/column/' + self.id,
+            method: 'DELETE',
+            success: function(response) {
+                self.element.remove();
+            }
+        });
     }
 };

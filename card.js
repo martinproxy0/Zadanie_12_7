@@ -1,9 +1,12 @@
+var prefix = 'https://cors-anywhere.herokuapp.com/';
+var baseUrl = 'https://kodilla.com/pl/bootcamp-api';
+
 // KLASA KANBAN CARD
 function Card(description) {
     var self = this;
 
-    this.id = randomString();
-    this.description = description;
+    this.id = id;
+    this.name = name || 'No name given';
     this.element = createCard();
 
     function createCard() {
@@ -16,13 +19,20 @@ function Card(description) {
         });
 
         card.append(cardDeleteBtn);
-        cardDescription.text(self.description);
-        card.append(cardDescription)
+        cardDescription.text(self.name);
+        card.append(cardDescription);
         return card;
     }
 }
 Card.prototype = {
     removeCard: function() {
-        this.element.remove();
+        var self = this;
+        $.ajax({
+            url: prefix + baseUrl + '/card/' + self.id,
+            method: 'DELETE',
+            success: function() {
+                self.element.remove();
+            }
+        });
     }
-}
+};

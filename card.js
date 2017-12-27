@@ -2,7 +2,7 @@ var prefix = 'https://cors-anywhere.herokuapp.com/';
 var baseUrl = 'https://kodilla.com/pl/bootcamp-api';
 
 // KLASA KANBAN CARD
-function Card(description) {
+function Card(id, name) {
     var self = this;
 
     this.id = id;

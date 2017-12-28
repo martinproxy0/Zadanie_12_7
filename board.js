@@ -29,5 +29,11 @@ function initSortable() {
     $('.card-list').sortable({
         connectWith: '.card-list',
         placeholder: 'card-placeholder'
+            /*
+            activate: function(event, ui) {
+                console.log(event);
+                console.log(ui);
+            }
+            */
     }).disableSelection();
 }

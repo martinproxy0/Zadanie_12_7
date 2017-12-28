@@ -6,19 +6,32 @@ body {
     box-sizing: border-box;
 }
 
+.column-container {
+    margin-top: 10px;
+}
+
 .ui-sortable {
     min-height: 80px;
 }
 
-.btn-delete {
+.btn-delete,
+.btn-delete-card {
     position: absolute;
-    right: 0;
-    top: 0;
-    width: 22px;
-    height: 22px;
-    border: 0;
-    background-color: rgba(0, 0, 0, 0.4);
+    top: 5px;
+    right: 2px;
+    padding: 6px 8px;
     color: white;
+}
+
+.btn-delete-card {
+    top: 2px;
+    padding: 0 4px;
+}
+
+.btn-edit {
+    position: absolute;
+    top: 5px;
+    right: 30px;
 }
 
 
